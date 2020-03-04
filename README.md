@@ -1,1 +1,2 @@
-# nuts-platform-protobuf-message
+# NUTS Platform Protobuf Message
+NUTS Platform Protobuf Message

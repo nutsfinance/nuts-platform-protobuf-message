@@ -4,12 +4,13 @@
   "description": "Protobuf JavaScript messages for Nuts Platform",
   "main": "index.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "mocha"
   },
   "author": "Frank Yin",
   "license": "ISC",
   "dependencies": {
     "bignumber.js": "^9.0.0",
-    "google-protobuf": "^3.10.0"
+    "google-protobuf": "^3.10.0",
+    "mocha": "^7.1.0"
   }
 }

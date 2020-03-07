@@ -33,16 +33,16 @@ describe('TestSerialization', () => {
   it('should serialize and deserialize lending maker parameters', () => {
     let proto = messages.LendingData;
     let lendingMakerParameters = new proto.LendingMakerParameters();
-    lendingMakerParameters.setCollateraltokenaddress(proto.address.fromAddress('0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF'));
-    lendingMakerParameters.setLendingtokenaddress(proto.address.fromAddress('0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF'));
+    lendingMakerParameters.setCollateraltokenaddress(proto.address.fromAddress('0xffffffffffffffffffffffffffffffffffffffff'));
+    lendingMakerParameters.setLendingtokenaddress(proto.address.fromAddress('0xffffffffffffffffffffffffffffffffffffffff'));
     lendingMakerParameters.setLendingamount(proto.uint256.fromNumber("1500000000000000000"));
     lendingMakerParameters.setCollateralratio(proto.uint256.fromNumber(20000));
     lendingMakerParameters.setTenordays(proto.uint256.fromNumber(45));
     lendingMakerParameters.setInterestrate(proto.uint256.fromNumber(300));
     let buffer = lendingMakerParameters.serializeBinary();
     let copy = proto.LendingMakerParameters.deserializeBinary(buffer);
-    expect(copy.getCollateraltokenaddress().toAddress()).to.equal('0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF');
-    expect(copy.getLendingtokenaddress().toAddress()).to.equal('0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF');
+    expect(copy.getCollateraltokenaddress().toAddress()).to.equal('0xffffffffffffffffffffffffffffffffffffffff');
+    expect(copy.getLendingtokenaddress().toAddress()).to.equal('0xffffffffffffffffffffffffffffffffffffffff');
     expect(copy.getLendingamount().toBigNumber()).to.deep.equal(new BigNumber("1500000000000000000"));
     expect(copy.getCollateralratio().toNumber()).to.equal(20000);
     expect(copy.getTenordays().toNumber()).to.equal(45);

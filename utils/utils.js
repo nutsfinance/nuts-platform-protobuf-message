@@ -15,10 +15,13 @@ function toBigInt(data, type) {
 }
 
 function saveAsBytes(number, type) {
-  let bigNumber = number;
-  if (Number.isInteger(number)) {
+  let bigNumber;
+  if (number instanceof BigNumber) {
+    bigNumber = number;
+  } else {
     bigNumber = BigNumber(number);
   }
+  
   let isNegative = bigNumber.isNegative();
   if (isNegative) {
     let positive = bigNumber.negated();

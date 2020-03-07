@@ -1,6 +1,6 @@
 {
   "name": "nuts-platform-protobuf-messages",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Protobuf JavaScript messages for Nuts Platform",
   "main": "index.js",
   "scripts": {

@@ -17,6 +17,13 @@ describe('TestDeserialization', () => {
     message.setInputamount(intField);
     assert.equal(1234, message.getInputamount().toNumber());
   }),
+  it('should return same integer number as string input', () => {
+    let proto = messages.SwapData;
+    let message = new proto.SpotSwapMakerParameters();
+    let intField = proto.solidity.uint256.fromNumber("1500000000000000000");
+    message.setInputamount(intField);
+    assert.equal(1500000000000000000, message.getInputamount().toNumber());
+  }),
   it('should return same integer bigint', () => {
     let proto = messages.SwapData;
     let message = new proto.SpotSwapMakerParameters();

@@ -38,9 +38,12 @@ function saveAsBytes(number, type) {
 
 module.exports = {
   importTypes: function (proto) {
-    proto.solidity['address'].prototype.saveAsBytes = function(data) {
-      let result = saveAsBytes(data, "biguint");
-      this.setData(result);
+    proto.solidity['address'].fromAddress = function(data) {
+      let address = new proto.solidity.address();
+      let bytes = saveAsBytes(new BigNumber(data), "biguint");
+      address.setData(bytes);
+
+      return address;
     }
 
     proto.solidity['address'].prototype.toAddress = function() {
@@ -49,14 +52,28 @@ module.exports = {
     }
 
     for (let i = 8; i <= 256; i += 8) {
-      proto.solidity['uint' + i].prototype.saveAsBytes = function(data) {
-        let result = saveAsBytes(data, "biguint");
-        this.setData(result);
+      /**
+       * APIs for unsigned integers.
+       */
+      proto.solidity['uint' + i].fromBigNumber = function(data) {
+        let number = new proto.solidity['uint' + i]();
+        let bytes = saveAsBytes(data, "biguint");
+        number.setData(bytes);
+
+        return number;
       }
 
-      proto.solidity['uint' + i].prototype.toBigInt = function() {
+      proto.solidity['uint' + i].prototype.toBigNumber = function() {
         let result = this.getData();
         return toBigInt(result, "biguint");
+      }
+
+      proto.solidity['uint' + i].fromNumber = function(data) {
+        let number = new proto.solidity['uint' + i]();
+        let bytes = saveAsBytes(data, "biguint");
+        number.setData(bytes);
+
+        return number;
       }
 
       proto.solidity['uint' + i].prototype.toNumber = function() {
@@ -64,14 +81,28 @@ module.exports = {
         return toBigInt(result, "biguint").toNumber();
       }
 
-      proto.solidity['int' + i].prototype.saveAsBytes = function(data) {
-        let result = saveAsBytes(data, "bigint");
-        this.setData(result);
+      /**
+       * APIs for signed integers.
+       */
+      proto.solidity['int' + i].fromBigNumber = function(data) {
+        let number = new proto.solidity['int' + i]();
+        let bytes = saveAsBytes(data, "bigint");
+        number.setData(bytes);
+
+        return number;
       }
 
-      proto.solidity['int' + i].prototype.toBigInt = function() {
+      proto.solidity['int' + i].prototype.toBigNumber = function() {
         let result = this.getData();
         return toBigInt(result, "bigint");
+      }
+
+      proto.solidity['int' + i].fromNumber = function(data) {
+        let number = new proto.solidity['int' + i]();
+        let bytes = saveAsBytes(data, "bigint");
+        number.setData(bytes);
+
+        return number;
       }
 
       proto.solidity['int' + i].prototype.toNumber = function() {
@@ -80,6 +111,9 @@ module.exports = {
       }
     }
 
+    /**
+       * APIs for bytes.
+       */
     for (let i = 1; i <= 32; i++) {
       proto.solidity['bytes' + i].prototype.toHex = function() {
         let result = this.getData();

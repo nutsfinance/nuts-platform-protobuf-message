@@ -1,12 +1,12 @@
 {
   "name": "nuts-platform-protobuf-messages",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Protobuf JavaScript messages for Nuts Platform",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
-  "author": "Frank Yin",
+  "author": "NUTS Finance",
   "license": "ISC",
   "dependencies": {
     "bignumber.js": "^9.0.0",
